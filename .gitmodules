@@ -1,0 +1,9 @@
+[submodule "libft"]
+	path = libft
+	url = git@github.com:MFelida/libft.git
+[submodule "ft_linalg"]
+	path = ft_linalg
+	url = git@github.com:/Mfelida/ft_linalg.git
+[submodule "ft_dynarr"]
+	path = ft_dynarr
+	url = git@github.com:MFelida/ft_dynarr.git

@@ -6,7 +6,7 @@
 /*   By: mifelida <mifelida@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 21:08:55 by mifelida          #+#    #+#             */
-/*   Updated: 2025/03/03 21:27:41 by mifelida         ###   ########.fr       */
+/*   Updated: 2025/03/03 23:30:08 by mifelida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,8 @@ t_model	*model_new( void )
 	if (!m)
 		return (NULL);
 	m->edges = edges_new(DEFAULT_SIZE);
-	if (!m->edges)
-		return (free(m), NULL);
 	m->verts = verts_new(DEFAULT_SIZE);
-	if (!m->verts)
+	if (!m->verts || !m->edges)
 		return (model_free(m), NULL);
 	m->width = 0;
 	m->height = 0;

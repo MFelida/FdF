@@ -6,7 +6,7 @@
 /*   By: mifelida <mifelida@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 20:44:52 by mifelida          #+#    #+#             */
-/*   Updated: 2025/03/03 21:07:43 by mifelida         ###   ########.fr       */
+/*   Updated: 2025/03/03 22:18:19 by mifelida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_edges	*edges_new(size_t size)
 int	edges_push(t_edges *e, t_edge new)
 {
 	if (new.start == new.end)
-		return 1;
+		return (1);
 	return (e->size == dynarr_pushback(e, &new));
 }
 
@@ -32,7 +32,6 @@ t_edge	edges_get(t_edges *e, size_t idx)
 {
 	t_edge	*p_res;
 	t_edge	res;
-	
 
 	p_res = dynarr_at(e, idx);
 	if (p_res)

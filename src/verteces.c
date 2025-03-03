@@ -6,7 +6,7 @@
 /*   By: mifelida <mifelida@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 20:27:15 by mifelida          #+#    #+#             */
-/*   Updated: 2025/03/03 21:37:29 by mifelida         ###   ########.fr       */
+/*   Updated: 2025/03/03 22:37:34 by mifelida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,14 @@ t_vertex	verts_get(t_verteces *v, size_t idx)
 	while (i < (sizeof(res.v) / sizeof(res.v.x)))
 		res.v.elements[i++] = nan;
 	return (res);
+}
+
+void	verts_set(t_verteces *v, size_t idx, t_vertex new)
+{
+	t_vertex	*dest;
+
+	dest = (t_vertex *) dynarr_at(v, idx);
+	if (!dest)
+		return ;
+	*dest = new;
 }

@@ -6,7 +6,7 @@
 /*   By: mifelida <mifelida@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 19:14:16 by mifelida          #+#    #+#             */
-/*   Updated: 2025/03/03 20:20:32 by mifelida         ###   ########.fr       */
+/*   Updated: 2025/03/03 21:27:05 by mifelida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,16 @@ typedef struct u_model
 	size_t		width;
 	size_t		height;
 }	t_model;
+
+t_model	*model_new( void );
+void	model_free(t_model *m);
+	
+t_verteces	*verts_new(size_t size);
+int			verts_push(t_verteces *e, t_vertex new);
+t_vertex	verts_get(t_verteces *e, size_t idx);
+
+t_edges		*edges_new(size_t size);
+int			edges_push(t_edges *e, t_edge new);
+t_edge		edges_get(t_edges *e, size_t idx);
 
 #endif	// FDF_H

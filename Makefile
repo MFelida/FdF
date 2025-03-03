@@ -1,9 +1,11 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -c -I$(INCDIR) -I$(LIBFTDIR) -I$(LINALGDIR)
+CFLAGS = -Wall -Wextra -Werror -c\
+		-I$(INCDIR) -I$(LIBFTDIR) -I$(LINALGDIR)/include\
+		-I$(DYNARRDIR)/include
 
 NAME = FdF
 
-SRCFILES = FdF.c
+SRCFILES = FdF.c edges.c verteces.c model.c
 SRCDIR = src
 SRCS = $(addprefix $(SRCDIR)/, $(SRCFILES))
 
@@ -13,6 +15,7 @@ OBJS = $(addprefix $(OBJDIR)/, $(OBJFILES))
 
 LIBFTDIR = ./libft
 LINALGDIR = ./ft_linalg
+DYNARRDIR = ./ft_dynarr
 
 LIBDIR = lib
 
@@ -22,15 +25,16 @@ INCDIR = include
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(LIBDIR)/libft.a $(LIBDIR)/libft_linalg.a
-	$(CC) $(OBJS) -o $(NAME) -L$(LIBDIR) -lft_linalg -lft -lm
+$(NAME): $(OBJS) $(LIBDIR)/libft.a $(LIBDIR)/libft_linalg.a\
+	$(LIBDIR)/libftdynarr.a
+	$(CC) $(OBJS) -o $(NAME) -L$(LIBDIR) -lftdynarr -lft_linalg -lft -lm
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c $(LIBFTDIR)/libft.h\
-	$(LINALGDIR)/include | $(OBJDIR)
+	$(LINALGDIR)/include $(DYNARRDIR)/include | $(OBJDIR)
 	$(CC)	$(CFLAGS) -o $@ $< 
 
 $(LIBFTDIR)/libft.h $(LIBDIR)/libft.a: | $(INCDIR) $(LIBDIR)
-	@ git submodule update --init --recursive
+	@ git submodule update --init --recursive libft
 	@ make -C $(LIBFTDIR) all
 	@ cd $(LIBDIR) && ln -sf ../$(LIBFTDIR)/libft.a
 
@@ -38,6 +42,11 @@ $(LINALGDIR)/include $(LIBDIR)/libft_linalg.a: | $(LIBDIR)
 	@ git submodule update --init --recursive ft_linalg
 	@ make -C $(LINALGDIR) LIBFTDIR="../libft"
 	@ cd $(LIBDIR) && ln -sf ../$(LINALGDIR)/libft_linalg.a
+
+$(DYNARRDIR)/include $(LIBDIR)/libftdynarr.a: | $(LIBDIR)
+	@ git submodule update --init --recursive ft_dynarr
+	@ make -C $(DYNARRDIR) LIBFTDIR="../libft"
+	@ cd $(LIBDIR) && ln -sf ../$(DYNARRDIR)/libftdynarr.a
 
 $(OBJDIR):
 	@ mkdir -p $(OBJDIR)

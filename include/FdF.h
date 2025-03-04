@@ -6,7 +6,7 @@
 /*   By: mifelida <mifelida@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 19:14:16 by mifelida          #+#    #+#             */
-/*   Updated: 2025/03/04 14:38:22 by mifelida         ###   ########.fr       */
+/*   Updated: 2025/03/04 15:02:00 by mifelida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 # include <stdint.h>
 
 t_model		*model_new( void );
-void		model_free(t_model *m);
+void		model_free(t_model **m);
 
-int			load_map(t_model *m, char *file);
+int			load_map(t_model **m, char *file);
 
 t_verteces	*verts_new(size_t size);
 int			verts_push(t_verteces *e, t_vertex new);

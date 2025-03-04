@@ -21,7 +21,7 @@ LIBDIR = lib
 
 INCDIR = include
 
-.PHONY: all clean fclean re run
+.PHONY: all clean fclean re run debug
 
 all: $(NAME)
 
@@ -31,7 +31,7 @@ $(NAME): $(OBJS) $(LIBDIR)/libft.a $(LIBDIR)/libft_linalg.a\
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c $(LIBFTDIR)/libft.h\
 	$(LINALGDIR)/include $(DYNARRDIR)/include | $(OBJDIR)
-	$(CC)	$(CFLAGS) -o $@ $< 
+	$(CC)	$(CFLAGS) -o $@ $<
 
 $(LIBFTDIR)/libft.h $(LIBDIR)/libft.a: | $(INCDIR) $(LIBDIR)
 	@ git submodule update --init --recursive libft
@@ -64,6 +64,9 @@ fclean: clean
 	@ rm -v $(NAME)
 
 re: fclean all
+
+debug: CFLAGS += -ggdb
+debug: $(NAME)
 
 run: all
 	@ clear

@@ -6,7 +6,7 @@
 /*   By: mifelida <mifelida@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 20:00:21 by mifelida          #+#    #+#             */
-/*   Updated: 2025/03/03 20:23:37 by mifelida         ###   ########.fr       */
+/*   Updated: 2025/03/04 14:41:24 by mifelida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #   define IS_LITTLE_ENDIAN 0
 #  else
 #   error "Unknown byte order"
-#  endif
+#  endif // __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
 # define IS_BIG_ENDIAN !(IS_LITTLE_ENDIAN)
 # else
 #  error "Unknown byte order"

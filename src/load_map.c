@@ -6,17 +6,20 @@
 /*   By: mifelida <mifelida@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 12:57:53 by mifelida          #+#    #+#             */
-/*   Updated: 2025/03/04 13:50:04 by mifelida         ###   ########.fr       */
+/*   Updated: 2025/03/04 14:42:43 by mifelida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "FdF.h"
+#include "FdF_types.h"
 #include "libft.h"
+#include <fcntl.h>
 #include <math.h>
 #include <stddef.h>
 #include <stdlib.h>
+#include <unistd.h>
 
-size_t	_add_row(t_model *m, char *line)
+static size_t	_add_row(t_model *m, char *line)
 {
 	char		**line_split;
 	size_t		i;
@@ -45,7 +48,7 @@ size_t	_add_row(t_model *m, char *line)
 	return (i);
 }
 
-int	load_map(t_model *m, int fd)
+static int	_load_verts(t_model *m, int fd)
 {
 	char	*line;
 
@@ -59,5 +62,47 @@ int	load_map(t_model *m, int fd)
 		free(line);
 		line = ft_gnl(fd);
 	}
+	return (0);
+}
+
+static int	_get_edges(t_model *m)
+{
+	size_t	i;
+	t_edge	e;
+
+	i = 0;
+	while (i < m->verts->size)
+	{
+		if (i % m->width < m->width - 1)
+		{
+			e.start = i;
+			e.end = i + 1;
+			if (edges_push(m->edges, e))
+				return (1);
+		}
+		if (i / m->width < m->height - 1)
+		{
+			e.start = 1;
+			e.end = i + m->width;
+			if (edges_push(m->edges, e))
+				return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
+int	load_map(t_model *m, char *file)
+{
+	int	fd;
+
+	fd = open(file, O_RDONLY);
+	if (fd < 0)
+		return (1);
+	if (_load_verts(m, fd))
+		return (close(fd), 1);
+	close(fd);
+	if (_get_edges(m))
+		return (1);
 	return (0);
 }

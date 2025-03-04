@@ -66,5 +66,6 @@ fclean: clean
 re: fclean all
 
 run: all
+	@ clear
 	@ echo "############# RUNNING $(NAME) #############"
-	@ ./$(NAME)
+	@ ./$(NAME) ./test_maps/10-2.fdf

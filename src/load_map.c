@@ -6,7 +6,7 @@
 /*   By: mifelida <mifelida@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 12:57:53 by mifelida          #+#    #+#             */
-/*   Updated: 2025/03/04 15:16:00 by mifelida         ###   ########.fr       */
+/*   Updated: 2025/03/04 16:02:19 by mifelida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,20 @@ static size_t	_add_row(t_model *m, char *line)
 static int	_load_verts(t_model *m, int fd)
 {
 	char	*line;
+	char	*trimmed;
 
 	line = ft_gnl(fd);
 	while (line)
 	{
-		if (m->width == 0)
-			m->width = _add_row(m, line);
-		else if (m->width != _add_row(m, line))
+		trimmed = ft_strtrim(line, "\n ");
+		if (!trimmed)
 			return (free(line), 1);
 		free(line);
+		if (m->width == 0)
+			m->width = _add_row(m, trimmed);
+		else if (m->width != _add_row(m, trimmed))
+			return (free(trimmed), 1);
+		free(trimmed);
 		line = ft_gnl(fd);
 	}
 	return (0);

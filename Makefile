@@ -38,6 +38,7 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c $(LIBFTDIR)/libft.h\
 
 $(LIBFTDIR)/libft.h $(LIBDIR)/libft.a: | $(INCDIR) $(LIBDIR)
 	@ git submodule update --init --recursive libft
+	@ cd $(LIBFTDIR) && git switch inc_math
 	@ make -C $(LIBFTDIR) all
 	@ cd $(LIBDIR) && ln -sf ../$(LIBFTDIR)/libft.a
 

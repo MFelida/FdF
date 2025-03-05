@@ -6,7 +6,7 @@
 /*   By: mifelida <mifelida@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 13:26:11 by mifelida          #+#    #+#             */
-/*   Updated: 2025/03/04 15:27:44 by mifelida         ###   ########.fr       */
+/*   Updated: 2025/03/05 19:23:57 by mifelida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,12 @@ typedef struct s_edge
 
 typedef struct s_view
 {
-	t_mat4	rotate;
-	t_mat4	scale;
-	t_mat4	translate;
-	t_mat4	transform;
+	t_mat4		rotate;
+	t_mat4		scale;
+	t_mat4		translate;
+	t_mat4		transform;
+	int			update;
+	t_verteces	*verts;
 }	t_view;
 
 typedef struct s_model

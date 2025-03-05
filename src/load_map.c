@@ -6,12 +6,13 @@
 /*   By: mifelida <mifelida@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 12:57:53 by mifelida          #+#    #+#             */
-/*   Updated: 2025/03/05 18:52:56 by mifelida         ###   ########.fr       */
+/*   Updated: 2025/03/05 19:26:46 by mifelida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "FdF.h"
 #include "FdF_types.h"
+#include "ft_dynarr.h"
 #include "libft.h"
 
 #include <fcntl.h>
@@ -113,6 +114,9 @@ int	load_map(t_model **m, char *file)
 		return (close(fd), model_free(m), 1);
 	close(fd);
 	if (_get_edges(*m))
+		return (model_free(m), 1);
+	(*m)->view.verts = dynarr_copy((*m)->verts);
+	if (!(*m)->view.verts)
 		return (model_free(m), 1);
 	return (0);
 }

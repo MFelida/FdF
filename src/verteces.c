@@ -6,15 +6,15 @@
 /*   By: mifelida <mifelida@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 20:27:15 by mifelida          #+#    #+#             */
-/*   Updated: 2025/03/03 22:37:34 by mifelida         ###   ########.fr       */
+/*   Updated: 2025/03/05 12:51:37 by mifelida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "FdF.h"
 #include "ft_dynarr.h"
 
-#include <stddef.h>
 #include <math.h>
+#include <stddef.h>
 
 t_verteces	*verts_new(size_t	size)
 {

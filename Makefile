@@ -1,7 +1,7 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -c\
 		-I$(INCDIR) -I$(LIBFTDIR) -I$(LINALGDIR)/include\
-		-I$(DYNARRDIR)/include
+		-I$(DYNARRDIR)/include -I$(MLX42DIR)/include/MLX42
 
 NAME = FdF
 
@@ -16,6 +16,7 @@ OBJS = $(addprefix $(OBJDIR)/, $(OBJFILES))
 LIBFTDIR = ./libft
 LINALGDIR = ./ft_linalg
 DYNARRDIR = ./ft_dynarr
+MLX42DIR = MLX42
 
 LIBDIR = lib
 
@@ -26,11 +27,12 @@ INCDIR = include
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBDIR)/libft.a $(LIBDIR)/libft_linalg.a\
-	$(LIBDIR)/libftdynarr.a
-	$(CC) $(OBJS) -o $(NAME) -L$(LIBDIR) -lftdynarr -lft_linalg -lft -lm
+	$(LIBDIR)/libftdynarr.a $(LIBDIR)/libmlx42.a
+	$(CC) $(OBJS) -o $(NAME) -L$(LIBDIR) -lftdynarr -lft_linalg -lft -lmlx42\
+		-ldl -lglfw -pthread -lm
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c $(LIBFTDIR)/libft.h\
-	$(LINALGDIR)/include $(DYNARRDIR)/include | $(OBJDIR)
+	$(LINALGDIR)/include $(DYNARRDIR)/include $(MLX42DIR)/include | $(OBJDIR)
 	$(CC)	$(CFLAGS) -o $@ $<
 
 $(LIBFTDIR)/libft.h $(LIBDIR)/libft.a: | $(INCDIR) $(LIBDIR)
@@ -47,6 +49,11 @@ $(DYNARRDIR)/include $(LIBDIR)/libftdynarr.a: | $(LIBDIR)
 	@ git submodule update --init --recursive ft_dynarr
 	@ make -C $(DYNARRDIR) LIBFTDIR="../libft"
 	@ cd $(LIBDIR) && ln -sf ../$(DYNARRDIR)/libftdynarr.a
+
+$(MLX42DIR)/include $(LIBDIR)/libmlx42.a: |$(LIBDIR)
+	@ git submodule update --init --recursive MLX42
+	@ cd $(MLX42DIR) && cmake -B build && cmake --build build -j8
+	@ cd $(LIBDIR) && ln -sf ../$(MLX42DIR)/build/libmlx42.a
 
 $(OBJDIR):
 	@ mkdir -p $(OBJDIR)

@@ -6,7 +6,7 @@
 /*   By: mifelida <mifelida@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 12:57:53 by mifelida          #+#    #+#             */
-/*   Updated: 2025/03/04 16:02:19 by mifelida         ###   ########.fr       */
+/*   Updated: 2025/03/05 12:09:37 by mifelida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static size_t	_add_row(t_model *m, char *line)
 	return (ft_split_free(line_split), i);
 }
 
-static int	_load_verts(t_model *m, int fd)
+static int	_load_verteces(t_model *m, int fd)
 {
 	char	*line;
 	char	*trimmed;
@@ -107,7 +107,7 @@ int	load_map(t_model **m, char *file)
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		return (model_free(m), 1);
-	if (_load_verts(*m, fd))
+	if (_load_verteces(*m, fd))
 		return (close(fd), model_free(m), 1);
 	close(fd);
 	if (_get_edges(*m))

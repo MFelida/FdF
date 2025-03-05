@@ -7,3 +7,6 @@
 [submodule "ft_dynarr"]
 	path = ft_dynarr
 	url = git@github.com:MFelida/ft_dynarr.git
+[submodule "MLX42"]
+	path = MLX42
+	url = git@github.com:codam-coding-college/MLX42.git

@@ -6,7 +6,7 @@ CFLAGS = -Wall -Wextra -Werror -c\
 NAME = FdF
 
 SRCFILES = FdF.c edges.c verteces.c model.c load_map.c\
-		   draw_line.c
+		   draw_line.c draw_map.c
 SRCDIR = src
 SRCS = $(addprefix $(SRCDIR)/, $(SRCFILES))
 

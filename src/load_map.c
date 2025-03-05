@@ -6,7 +6,7 @@
 /*   By: mifelida <mifelida@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 12:57:53 by mifelida          #+#    #+#             */
-/*   Updated: 2025/03/05 12:09:37 by mifelida         ###   ########.fr       */
+/*   Updated: 2025/03/05 13:41:38 by mifelida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include <unistd.h>
+
+#define WHITE	0XFFFFFFFF
 
 static size_t	_add_row(t_model *m, char *line)
 {
@@ -35,7 +37,7 @@ static size_t	_add_row(t_model *m, char *line)
 	new.v.w = 1;
 	while (line_split[i])
 	{
-		new.c = 0xFFFFFFFF;
+		new.c = WHITE;
 		new.v.x = i;
 		new.v.z = ft_atoi(line_split[i]);
 		if (ft_strnstr(line_split[i], "0x", ft_strlen(line_split[i])))

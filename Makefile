@@ -1,11 +1,12 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -c\
 		-I$(INCDIR) -I$(LIBFTDIR) -I$(LINALGDIR)/include\
-		-I$(DYNARRDIR)/include -I$(MLX42DIR)/include/MLX42
+		-I$(DYNARRDIR)/include -I$(MLX42DIR)/include
 
 NAME = FdF
 
-SRCFILES = FdF.c edges.c verteces.c model.c load_map.c
+SRCFILES = FdF.c edges.c verteces.c model.c load_map.c\
+		   draw_line.c
 SRCDIR = src
 SRCS = $(addprefix $(SRCDIR)/, $(SRCFILES))
 

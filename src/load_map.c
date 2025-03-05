@@ -6,7 +6,7 @@
 /*   By: mifelida <mifelida@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 12:57:53 by mifelida          #+#    #+#             */
-/*   Updated: 2025/03/05 13:41:38 by mifelida         ###   ########.fr       */
+/*   Updated: 2025/03/05 18:52:56 by mifelida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static int	_get_edges(t_model *m)
 		}
 		if (i / m->width < m->height - 1)
 		{
-			e.start = 1;
+			e.start = i;
 			e.end = i + m->width;
 			if (edges_push(m->edges, e))
 				return (1);

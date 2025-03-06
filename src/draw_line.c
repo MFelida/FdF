@@ -55,7 +55,7 @@ static void	_draw_line_steep(mlx_image_t *image, t_vertex a, t_vertex b)
 	if (d.x < 0)
 	{
 		xi = -1;
-		d.y *= -1;
+		d.x *= -1;
 	}
 	big_d = 2 * d.x - d.y;
 	while (a.v.y <= b.v.y)

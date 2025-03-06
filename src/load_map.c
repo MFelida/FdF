@@ -6,7 +6,7 @@
 /*   By: mifelida <mifelida@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 12:57:53 by mifelida          #+#    #+#             */
-/*   Updated: 2025/03/06 12:10:17 by mifelida         ###   ########.fr       */
+/*   Updated: 2025/03/06 13:24:54 by mifelida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,17 @@ static int	_load_verteces(t_model *m, int fd)
 	line = ft_gnl(fd);
 	while (line)
 	{
-		trimmed = ft_strtrim(line, "\n ");
+		trimmed = ft_strtrim(line, "\n");
 		if (!trimmed)
 			return (free(line), 1);
 		free(line);
-		if (m->width == 0)
+		if (m->height == 0)
 			m->width = _add_row(m, trimmed);
-		else if (m->width != _add_row(m, trimmed))
+		else if (m->width == 0 || m->width != _add_row(m, trimmed))
 			return (free(trimmed), 1);
 		free(trimmed);
+		if (m->width == 0)
+			return (1);
 		line = ft_gnl(fd);
 	}
 	return (0);

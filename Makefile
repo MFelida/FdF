@@ -74,7 +74,7 @@ fclean: clean
 
 re: fclean all
 
-debug: CFLAGS += -ggdb
+debug: CFLAGS += -gdwarf-2 -O0
 debug: $(NAME)
 
 run: all

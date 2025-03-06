@@ -6,7 +6,7 @@
 /*   By: mifelida <mifelida@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 17:43:30 by mifelida          #+#    #+#             */
-/*   Updated: 2025/03/05 20:07:07 by mifelida         ###   ########.fr       */
+/*   Updated: 2025/03/06 12:11:44 by mifelida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	_transform_map(t_model *m)
 	m->view.transform = mat4_multiply(m->view.transform, m->view.scale);
 	m->view.transform = mat4_multiply(m->view.transform, m->view.translate);
 	i = 0;
-	while (i < m->verts->size)
+	while (i < m->verts->attr.size)
 	{
 		v = verts_get(m->verts, i);
 		v.v = vec4_transform(m->view.transform, v.v);
@@ -45,7 +45,7 @@ void	draw_map(mlx_image_t *image, t_model *m)
 	i = 0;
 	if (m->view.update)
 		_transform_map(m);
-	while (i < m->edges->size)
+	while (i < m->edges->attr.size)
 	{
 		e = edges_get(m->edges, i);
 		draw_line(image,

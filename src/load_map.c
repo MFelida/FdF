@@ -6,7 +6,7 @@
 /*   By: mifelida <mifelida@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 12:57:53 by mifelida          #+#    #+#             */
-/*   Updated: 2025/03/05 19:26:46 by mifelida         ###   ########.fr       */
+/*   Updated: 2025/03/06 12:10:17 by mifelida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ static size_t	_add_row(t_model *m, char *line)
 		if (ft_strnstr(line_split[i], "0x", ft_strlen(line_split[i])))
 			new.c = ft_atoi_base(ft_strchr(line_split[i], 'x') + 1,
 					"0123456789abcdef");
-		verts_push(m->verts, new);
+		if (verts_push(m->verts, new))
+			return (0);
 		i++;
 	}
 	m->height++;
@@ -79,7 +80,7 @@ static int	_get_edges(t_model *m)
 	t_edge	e;
 
 	i = 0;
-	while (i < m->verts->size)
+	while (i < m->verts->attr.size)
 	{
 		if (i % m->width < m->width - 1)
 		{
@@ -115,7 +116,7 @@ int	load_map(t_model **m, char *file)
 	close(fd);
 	if (_get_edges(*m))
 		return (model_free(m), 1);
-	(*m)->view.verts = dynarr_copy((*m)->verts);
+	(*m)->view.verts = (t_verteces *) dynarr_copy(&(*m)->verts->attr);
 	if (!(*m)->view.verts)
 		return (model_free(m), 1);
 	return (0);

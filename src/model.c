@@ -6,7 +6,7 @@
 /*   By: mifelida <mifelida@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 21:08:55 by mifelida          #+#    #+#             */
-/*   Updated: 2025/03/05 19:27:49 by mifelida         ###   ########.fr       */
+/*   Updated: 2025/03/06 12:07:46 by mifelida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ void	model_free(t_model **m)
 	if (!*m)
 		return ;
 	if ((*m)->verts)
-		dynarr_free(&(*m)->verts);
+		dynarr_free(&(*m)->verts->attr);
 	if ((*m)->edges)
-		dynarr_free(&(*m)->edges);
+		dynarr_free(&(*m)->edges->attr);
 	if ((*m)->view.verts)
-		dynarr_free(&(*m)->view.verts);
+		dynarr_free(&(*m)->view.verts->attr);
 	free(*m);
 	*m = NULL;
 }

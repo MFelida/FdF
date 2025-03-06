@@ -6,7 +6,7 @@
 /*   By: mifelida <mifelida@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 13:26:11 by mifelida          #+#    #+#             */
-/*   Updated: 2025/03/05 19:23:57 by mifelida         ###   ########.fr       */
+/*   Updated: 2025/03/06 12:04:08 by mifelida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 # include "check_endian.h"
 
 # include <stdint.h>
-
-typedef t_dynarr	t_verteces;
 
 # if IS_LITTLE_ENDIAN
 
@@ -58,13 +56,23 @@ typedef struct u_vertex
 }	t_vertex;
 # endif
 
-typedef t_dynarr	t_edges;
+typedef union u_verteces
+{
+	const t_vertex	*data;
+	t_dynarr		attr;
+}	t_verteces;
 
 typedef struct s_edge
 {
 	size_t	start;
 	size_t	end;
 }	t_edge;
+
+typedef union u_edges
+{
+	const t_edge	*data;
+	t_dynarr		attr;
+}	t_edges;
 
 typedef struct s_view
 {

@@ -6,10 +6,11 @@
 /*   By: mifelida <mifelida@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 15:07:43 by mifelida          #+#    #+#             */
-/*   Updated: 2025/03/05 18:40:01 by mifelida         ###   ########.fr       */
+/*   Updated: 2025/03/06 15:34:15 by mifelida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "FdF_settings.h"
 #include "FdF_types.h"
 #include "MLX42/MLX42.h"
 #include "vector.h"
@@ -104,6 +105,9 @@ void	draw_line(mlx_image_t *image, t_vertex a, t_vertex b)
 {
 	t_vec2	d;
 
+	if (fminf(a.v.x, b.v.x) < 0 || fmaxf(a.v.x, b.v.x) >= WINDOW_WIDTH
+		|| fminf(a.v.y, b.v.y) < 0 || fmaxf(a.v.y, b.v.y) >= WINDOW_HEIGHT)
+		return ;
 	d = vec2_add(b.v.xy, vec2_scale(a.v.xy, -1));
 	if (d.x == 0)
 		_draw_line_vertical(image, a, b);

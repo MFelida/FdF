@@ -6,7 +6,7 @@
 /*   By: mifelida <mifelida@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 19:14:16 by mifelida          #+#    #+#             */
-/*   Updated: 2025/03/05 17:55:01 by mifelida         ###   ########.fr       */
+/*   Updated: 2025/03/06 16:20:58 by mifelida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void		model_free(t_model **m);
 
 int			load_map(t_model **m, char *file);
 
+void	center_map(t_model *m);
 void		draw_map(mlx_image_t *image, t_model *m);
 
 void		draw_line(mlx_image_t *image, t_vertex a, t_vertex b);

@@ -6,7 +6,7 @@
 /*   By: mifelida <mifelida@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 20:44:52 by mifelida          #+#    #+#             */
-/*   Updated: 2025/03/06 12:06:51 by mifelida         ###   ########.fr       */
+/*   Updated: 2025/03/07 12:04:44 by mifelida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	edges_push(t_edges *e, t_edge new)
 {
 	if (!e || new.start == new.end)
 		return (1);
-	return (e->attr.size== dynarr_pushback(&e->attr, &new));
+	return (e->attr.size == dynarr_pushback(&e->attr, &new));
 }
 
 // Start and end equal if failed

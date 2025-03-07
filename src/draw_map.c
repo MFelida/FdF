@@ -6,7 +6,7 @@
 /*   By: mifelida <mifelida@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 17:43:30 by mifelida          #+#    #+#             */
-/*   Updated: 2025/03/06 16:36:33 by mifelida         ###   ########.fr       */
+/*   Updated: 2025/03/07 12:04:06 by mifelida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static t_vec4	_find_map_minmax(t_model *m)
 {
 	t_vec4		minmax;
 	size_t		i;
-	t_vec2	v;
+	t_vec2		v;
 
 	minmax.x = INFINITY;
 	minmax.y = INFINITY;
@@ -58,7 +58,7 @@ static t_vec4	_find_map_minmax(t_model *m)
 		if (v.x > minmax.elements[2])
 			minmax.elements[2] = v.x;
 		if (v.y < minmax.elements[1])
-			minmax.elements[1]= v.y;
+			minmax.elements[1] = v.y;
 		if (v.y > minmax.elements[3])
 			minmax.elements[3] = v.y;
 		i++;
@@ -79,7 +79,7 @@ void	center_map(t_model *m)
 			((float) WINDOW_HEIGHT - 20) / (minmax[1].y - minmax[0].y));
 	m->view.scale = mat4_scale(scale, scale, scale, 1);
 	m->view.translate = mat4_translate(minmax[0].x * -scale + 10,
-									minmax[0].y * -scale + 10, 0);
+			minmax[0].y * -scale + 10, 0);
 	m->view.update = 1;
 }
 

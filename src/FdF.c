@@ -6,7 +6,7 @@
 /*   By: mifelida <mifelida@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 20:21:10 by mifelida          #+#    #+#             */
-/*   Updated: 2025/03/06 18:13:30 by mifelida         ###   ########.fr       */
+/*   Updated: 2025/03/07 12:03:17 by mifelida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include "MLX42/MLX42.h"
 #include "libft.h"
 #include "matrix.h"
-#include "vector.h"
 
 #include <fcntl.h>
 #include <math.h>
@@ -50,11 +49,10 @@ int	main(int argc, char *argv[])
 		return (EXIT_FAILURE);
 	fdf.m->view.rotate = mat4_multiply(mat4_rotz(-M_PI_4), fdf.m->view.rotate);
 	fdf.m->view.rotate = mat4_multiply(mat4_rotx(asinf(1.0f / sqrtf(3))),
-									fdf.m->view.rotate);
+			fdf.m->view.rotate);
 	mlx_image_to_window(fdf.mlx, fdf.image, 0, 0);
 	center_map(fdf.m);
 	draw_map(fdf.image, fdf.m);
-	// mlx_loop_hook(fdf.mlx, loop_callback, &fdf);
 	mlx_loop(fdf.mlx);
 	mlx_terminate(fdf.mlx);
 	model_free(&fdf.m);

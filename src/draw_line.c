@@ -6,7 +6,7 @@
 /*   By: mifelida <mifelida@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 15:07:43 by mifelida          #+#    #+#             */
-/*   Updated: 2025/03/06 15:34:15 by mifelida         ###   ########.fr       */
+/*   Updated: 2025/03/06 16:59:20 by mifelida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static void	_draw_line_vertical(mlx_image_t *image, t_vertex a, t_vertex b)
 		dy = -1;
 	while ((dy == 1 && a.v.y <= b.v.y) || (dy == -1 && a.v.y >= b.v.y))
 	{
-		mlx_put_pixel(image, a.v.x, a.v.y, a.c);
+		mlx_put_pixel(image, roundf(a.v.x), roundf(a.v.y), a.c);
 		a.v.y += dy;
 	}
 }

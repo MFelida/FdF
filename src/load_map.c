@@ -6,7 +6,7 @@
 /*   By: mifelida <mifelida@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 12:57:53 by mifelida          #+#    #+#             */
-/*   Updated: 2025/03/06 17:09:05 by mifelida         ###   ########.fr       */
+/*   Updated: 2025/03/07 12:11:07 by mifelida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,19 @@
 
 #include <fcntl.h>
 #include <stddef.h>
+#include <stdint.h>
 #include <stdlib.h>
 #include <unistd.h>
 
 #define WHITE	0XFFFFFFFF
+
+static uint32_t	_get_color(char *s)
+{
+	if (ft_strnstr(s, "0x", ft_strlen(s)))
+		return (ft_atoi_base(ft_strchr(s, 'x') + 1,
+				"0123456789abcdef") << 8 | 0xFF);
+	return (WHITE);
+}
 
 static size_t	_add_row(t_model *m, char *line)
 {
@@ -38,14 +47,11 @@ static size_t	_add_row(t_model *m, char *line)
 	new.v.w = 1;
 	while (line_split[i])
 	{
-		new.c = WHITE;
 		new.v.x = i * 10;
 		new.v.z = ft_atoi(line_split[i]);
-		if (ft_strnstr(line_split[i], "0x", ft_strlen(line_split[i])))
-			new.c = ft_atoi_base(ft_strchr(line_split[i], 'x') + 1,
-					"0123456789abcdef") << 8 | 0xFF;
+		new.c = _get_color(line_split[i]);
 		if (verts_push(m->verts, new))
-			return (0);
+			return (ft_split_free(line_split), 0);
 		i++;
 	}
 	m->height++;

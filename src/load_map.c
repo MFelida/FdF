@@ -6,7 +6,7 @@
 /*   By: mifelida <mifelida@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 12:57:53 by mifelida          #+#    #+#             */
-/*   Updated: 2025/03/06 13:24:54 by mifelida         ###   ########.fr       */
+/*   Updated: 2025/03/06 17:09:05 by mifelida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,16 @@ static size_t	_add_row(t_model *m, char *line)
 	if (!line_split)
 		return (0);
 	i = 0;
-	new.v.y = m->height;
+	new.v.y = m->height * 10;
 	new.v.w = 1;
 	while (line_split[i])
 	{
 		new.c = WHITE;
-		new.v.x = i;
+		new.v.x = i * 10;
 		new.v.z = ft_atoi(line_split[i]);
 		if (ft_strnstr(line_split[i], "0x", ft_strlen(line_split[i])))
 			new.c = ft_atoi_base(ft_strchr(line_split[i], 'x') + 1,
-					"0123456789abcdef");
+					"0123456789abcdef") << 8 | 0xFF;
 		if (verts_push(m->verts, new))
 			return (0);
 		i++;

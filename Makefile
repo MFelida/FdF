@@ -6,7 +6,7 @@ CFLAGS = -Wall -Wextra -Werror -c\
 NAME = FdF
 
 SRCFILES = FdF.c edges.c verteces.c model.c load_map.c\
-		   draw_line.c draw_map.c
+		   draw_line.c draw_map.c draw_utils.c
 SRCDIR = src
 SRCS = $(addprefix $(SRCDIR)/, $(SRCFILES))
 
@@ -25,6 +25,8 @@ INCDIR = include
 
 .PHONY: all clean fclean re run debug
 
+
+all: CFLAGS += -O3
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBDIR)/libft.a $(LIBDIR)/libft_linalg.a\

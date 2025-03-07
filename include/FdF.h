@@ -6,7 +6,7 @@
 /*   By: mifelida <mifelida@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 19:14:16 by mifelida          #+#    #+#             */
-/*   Updated: 2025/03/06 16:20:58 by mifelida         ###   ########.fr       */
+/*   Updated: 2025/03/06 17:26:58 by mifelida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,13 @@
 
 # include <stddef.h>
 # include <stdint.h>
+
+typedef struct s_fdf
+{
+	mlx_t		*mlx;
+	t_model		*m;
+	mlx_image_t	*image;
+}	t_fdf;
 
 t_model		*model_new( void );
 void		model_free(t_model **m);

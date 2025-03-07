@@ -6,7 +6,7 @@
 /*   By: mifelida <mifelida@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 20:21:10 by mifelida          #+#    #+#             */
-/*   Updated: 2025/03/06 12:19:40 by mifelida         ###   ########.fr       */
+/*   Updated: 2025/03/06 18:13:30 by mifelida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,41 +19,44 @@
 #include "vector.h"
 
 #include <fcntl.h>
+#include <math.h>
 #include <stdbool.h>
 #include <stddef.h>
+#include <stdint.h>
 #include <stdlib.h>
 #include <unistd.h>
 
+void	loop_callback(void *param)
+{
+	t_fdf	*fdf;
+
+	fdf = param;
+	ft_bzero(fdf->image->pixels,
+		fdf->image->width * fdf->image->height * sizeof(uint32_t));
+	draw_map(fdf->image, fdf->m);
+}
+
 int	main(int argc, char *argv[])
 {
-	t_model		*m;
-	size_t		i;
-	// mlx_t		*mlx;
-	// mlx_image_t	*im;
+	t_fdf	fdf;
 
-	if (argc != 2 || load_map(&m, argv[1]))
+	fdf.mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE, false);
+	if (!fdf.mlx)
+		return (model_free(&fdf.m), EXIT_FAILURE);
+	fdf.image = mlx_new_image(fdf.mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	if (!fdf.image)
+		return (model_free(&fdf.m), mlx_terminate(fdf.mlx), EXIT_FAILURE);
+	if (argc != 2 || load_map(&fdf.m, argv[1]))
 		return (EXIT_FAILURE);
-	// mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE, false);
-	// if (!mlx)
-		// return (model_free(&m), mlx_terminate(mlx), EXIT_FAILURE);
-	// im = mlx_new_image(mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
-	// if (!im)
-		// return (model_free(&m), EXIT_FAILURE);
-	m->view.scale = mat4_scale(50, 50, 50, 50);
-	// mlx_image_to_window(mlx, im, 0, 0);
-	// draw_map(im, m);
-	i = 0;
-	while (i < m->verts->attr.size)
-	{
-		ft_printf("%d", (int) m->verts->data[i++].v.z);
-		if (i % m->width == 0)
-			ft_putchar_fd('\n', STDOUT_FILENO);
-		else
-			ft_putchar_fd(' ', STDOUT_FILENO);
-	}
-	// mlx_loop(mlx);
-	// mlx_terminate(mlx);
-	// free(im);
-	model_free(&m);
+	fdf.m->view.rotate = mat4_multiply(mat4_rotz(-M_PI_4), fdf.m->view.rotate);
+	fdf.m->view.rotate = mat4_multiply(mat4_rotx(asinf(1.0f / sqrtf(3))),
+									fdf.m->view.rotate);
+	mlx_image_to_window(fdf.mlx, fdf.image, 0, 0);
+	center_map(fdf.m);
+	draw_map(fdf.image, fdf.m);
+	// mlx_loop_hook(fdf.mlx, loop_callback, &fdf);
+	mlx_loop(fdf.mlx);
+	mlx_terminate(fdf.mlx);
+	model_free(&fdf.m);
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: mifelida <mifelida@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 19:14:16 by mifelida          #+#    #+#             */
-/*   Updated: 2025/03/07 12:13:51 by mifelida         ###   ########.fr       */
+/*   Updated: 2025/03/07 19:25:29 by mifelida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void		center_map(t_model *m);
 void		draw_map(mlx_image_t *image, t_model *m);
 
 void		draw_line(mlx_image_t *image, t_vertex a, t_vertex b);
+void		fdf_put_pixel(mlx_image_t *image, const t_vec3 *v,
+		uint32_t c);
 
 t_verteces	*verts_new(size_t size);
 int			verts_push(t_verteces *e, t_vertex new);

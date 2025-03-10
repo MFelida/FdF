@@ -6,7 +6,7 @@
 /*   By: mifelida <mifelida@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 15:07:43 by mifelida          #+#    #+#             */
-/*   Updated: 2025/03/07 19:29:04 by mifelida         ###   ########.fr       */
+/*   Updated: 2025/03/10 20:43:42 by mifelida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	_draw_line_flat(mlx_image_t *image, t_vertex a, t_vertex b)
 	big_d = 2 * d.y - d.x;
 	while (a.v.x <= b.v.x)
 	{
-		fdf_put_pixel(image, &a.v.xyz, a.c);
+		fdf_put_pixel(image, &a.v.xyz, interpolate_color(&a, &b, &d));
 		if (big_d > 0)
 		{
 			a.v.y += yi;
@@ -62,7 +62,7 @@ static void	_draw_line_steep(mlx_image_t *image, t_vertex a, t_vertex b)
 	big_d = 2 * d.x - d.y;
 	while (a.v.y <= b.v.y)
 	{
-		fdf_put_pixel(image, &a.v.xyz, a.c);
+		fdf_put_pixel(image, &a.v.xyz, interpolate_color(&a, &b, &d));
 		if (big_d > 0)
 		{
 			a.v.x += xi;
@@ -83,7 +83,8 @@ static void	_draw_line_horizontal(mlx_image_t *image, t_vertex a, t_vertex b)
 		dx = -1;
 	while ((dx == 1 && a.v.x <= b.v.x) || (dx == -1 && a.v.x >= b.v.x))
 	{
-		fdf_put_pixel(image, &a.v.xyz, a.c);
+		fdf_put_pixel(image, &a.v.xyz, interpolate_color(&a, &b,
+				&(t_vec2){.x = dx, .y = 0}));
 		a.v.x += dx;
 	}
 }
@@ -97,7 +98,8 @@ static void	_draw_line_vertical(mlx_image_t *image, t_vertex a, t_vertex b)
 		dy = -1;
 	while ((dy == 1 && a.v.y <= b.v.y) || (dy == -1 && a.v.y >= b.v.y))
 	{
-		fdf_put_pixel(image, &a.v.xyz, a.c);
+		fdf_put_pixel(image, &a.v.xyz, interpolate_color(&a, &b,
+				&(t_vec2){.x = 0, .y = dy}));
 		a.v.y += dy;
 	}
 }

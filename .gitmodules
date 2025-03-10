@@ -1,6 +1,7 @@
 [submodule "libft"]
 	path = libft
 	url = git@github.com:MFelida/libft.git
+	branch = inc_math
 [submodule "ft_linalg"]
 	path = ft_linalg
 	url = git@github.com:/Mfelida/ft_linalg.git

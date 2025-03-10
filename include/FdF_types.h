@@ -6,7 +6,7 @@
 /*   By: mifelida <mifelida@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 13:26:11 by mifelida          #+#    #+#             */
-/*   Updated: 2025/03/06 12:04:08 by mifelida         ###   ########.fr       */
+/*   Updated: 2025/03/09 12:40:37 by mifelida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,16 @@ typedef struct s_model
 	size_t		height;
 	t_view		view;
 }	t_model;
+
+typedef union u_hsv
+{
+	struct
+	{
+		float	hue;
+		float	sat;
+		float	val;
+	};
+	t_vec3	v;
+}	t_hsv;
 
 #endif // !FDF_TYPES_H

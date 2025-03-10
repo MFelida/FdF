@@ -6,7 +6,7 @@ CFLAGS = -Wall -Wextra -Werror -c\
 NAME = FdF
 
 SRCFILES = FdF.c edges.c verteces.c model.c load_map.c\
-		   draw_line.c draw_map.c draw_utils.c
+		   draw_line.c draw_map.c draw_utils.c to_hsv.c to_rgb.c
 SRCDIR = src
 SRCS = $(addprefix $(SRCDIR)/, $(SRCFILES))
 
@@ -74,7 +74,7 @@ clean:
 fclean: clean
 	@ rm -v $(NAME)
 
-re: fclean all
+re: clean all
 
 debug: CFLAGS += -gdwarf-2 -O0
 debug: $(NAME)

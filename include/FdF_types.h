@@ -6,7 +6,7 @@
 /*   By: mifelida <mifelida@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 13:26:11 by mifelida          #+#    #+#             */
-/*   Updated: 2025/03/09 12:40:37 by mifelida         ###   ########.fr       */
+/*   Updated: 2025/03/10 21:23:58 by mifelida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef union u_edges
 
 typedef struct s_view
 {
+	t_mat4		base;
 	t_mat4		rotate;
 	t_mat4		scale;
 	t_mat4		translate;

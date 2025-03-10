@@ -6,7 +6,7 @@
 /*   By: mifelida <mifelida@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 20:21:10 by mifelida          #+#    #+#             */
-/*   Updated: 2025/03/07 12:03:17 by mifelida         ###   ########.fr       */
+/*   Updated: 2025/03/09 23:15:22 by mifelida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "MLX42/MLX42.h"
 #include "libft.h"
 #include "matrix.h"
+#include "vector_utils.h"
 
 #include <fcntl.h>
 #include <math.h>
@@ -39,19 +40,15 @@ int	main(int argc, char *argv[])
 {
 	t_fdf	fdf;
 
+	if (argc != 2 || load_map(&fdf.m, argv[1]))
+		return (EXIT_FAILURE);
 	fdf.mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE, false);
 	if (!fdf.mlx)
 		return (model_free(&fdf.m), EXIT_FAILURE);
 	fdf.image = mlx_new_image(fdf.mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (!fdf.image)
 		return (model_free(&fdf.m), mlx_terminate(fdf.mlx), EXIT_FAILURE);
-	if (argc != 2 || load_map(&fdf.m, argv[1]))
-		return (EXIT_FAILURE);
-	fdf.m->view.rotate = mat4_multiply(mat4_rotz(-M_PI_4), fdf.m->view.rotate);
-	fdf.m->view.rotate = mat4_multiply(mat4_rotx(asinf(1.0f / sqrtf(3))),
-			fdf.m->view.rotate);
 	mlx_image_to_window(fdf.mlx, fdf.image, 0, 0);
-	center_map(fdf.m);
 	draw_map(fdf.image, fdf.m);
 	mlx_loop(fdf.mlx);
 	mlx_terminate(fdf.mlx);

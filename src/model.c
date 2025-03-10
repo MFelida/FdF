@@ -6,7 +6,7 @@
 /*   By: mifelida <mifelida@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 21:08:55 by mifelida          #+#    #+#             */
-/*   Updated: 2025/03/07 12:12:52 by mifelida         ###   ########.fr       */
+/*   Updated: 2025/03/10 21:44:52 by mifelida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ t_model	*model_new( void )
 	m->view.verts = NULL;
 	m->width = 0;
 	m->height = 0;
-	m->view.update = 1;
+	m->view.update = 0;
+	m->view.base = mat4_identity();
 	m->view.rotate = mat4_identity();
 	m->view.scale = mat4_identity();
 	m->view.translate = mat4_identity();

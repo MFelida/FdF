@@ -6,7 +6,7 @@
 /*   By: mifelida <mifelida@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 17:43:30 by mifelida          #+#    #+#             */
-/*   Updated: 2025/03/07 12:04:06 by mifelida         ###   ########.fr       */
+/*   Updated: 2025/03/10 21:43:01 by mifelida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "FdF_types.h"
 #include "FdF_settings.h"
 #include "MLX42/MLX42.h"
+#include "libft.h"
 #include "matrix.h"
 #include "vector.h"
 #include <math.h>
@@ -24,9 +25,13 @@ static void	_transform_map(t_model *m)
 	size_t		i;
 	t_vertex	v;
 
-	m->view.transform = m->view.rotate;
-	m->view.transform = mat4_multiply(m->view.scale, m->view.transform);
-	m->view.transform = mat4_multiply(m->view.translate, m->view.transform);
+	if (m->view.update)
+	{
+		m->view.transform = mat4_multiply(m->view.rotate, m->view.base);
+		m->view.transform = mat4_multiply(m->view.scale, m->view.transform);
+		m->view.transform = mat4_multiply(m->view.translate, m->view.transform);
+		m->view.update = 0;
+	}
 	i = 0;
 	while (i < m->verts->attr.size)
 	{
@@ -52,14 +57,14 @@ static t_vec4	_find_map_minmax(t_model *m)
 	i = 0;
 	while (i < m->verts->attr.size)
 	{
-		v = m->view.verts->data[i].v.xy;
+		v = m->verts->data[i].v.xy;
 		if (v.x < minmax.elements[0])
 			minmax.elements[0] = v.x;
-		if (v.x > minmax.elements[2])
+		else if (v.x > minmax.elements[2])
 			minmax.elements[2] = v.x;
 		if (v.y < minmax.elements[1])
 			minmax.elements[1] = v.y;
-		if (v.y > minmax.elements[3])
+		else if (v.y > minmax.elements[3])
 			minmax.elements[3] = v.y;
 		i++;
 	}
@@ -73,13 +78,16 @@ void	center_map(t_model *m)
 	float	scale;
 
 	mm4 = (t_vec4 *) minmax;
-	_transform_map(m);
 	*mm4 = _find_map_minmax(m);
-	scale = fminf(((float) WINDOW_WIDTH - 20) / (minmax[1].x - minmax[0].x),
-			((float) WINDOW_HEIGHT - 20) / (minmax[1].y - minmax[0].y));
-	m->view.scale = mat4_scale(scale, scale, scale, 1);
-	m->view.translate = mat4_translate(minmax[0].x * -scale + 10,
-			minmax[0].y * -scale + 10, 0);
+	m->view.base = mat4_translate(-1 * (minmax[1].x - minmax[0].x) / 2.0f,
+			-1 * (minmax[1].y - minmax[0].y) / 2.0f, 0);
+	scale = fminf(WINDOW_WIDTH * 0.9f / (minmax[1].x - minmax[0].x),
+			WINDOW_HEIGHT * 0.9f / (minmax[1].y - minmax[0].y));
+	m->view.base = mat4_multiply(mat4_scale(scale, scale, scale, 1),
+			m->view.base);
+	m->view.base = mat4_multiply(mat4_rotz(-M_PI_4), m->view.base);
+	m->view.base = mat4_multiply(mat4_rotx(atanf(sqrtf(2))),
+			m->view.base);
 	m->view.update = 1;
 }
 
@@ -89,6 +97,7 @@ void	draw_map(mlx_image_t *image, t_model *m)
 	t_edge	e;
 
 	i = 0;
+	fdf_put_pixel(NULL, NULL, 0);
 	if (m->view.update)
 		_transform_map(m);
 	while (i < m->edges->attr.size)

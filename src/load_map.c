@@ -6,7 +6,7 @@
 /*   By: mifelida <mifelida@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 12:57:53 by mifelida          #+#    #+#             */
-/*   Updated: 2025/03/07 12:11:07 by mifelida         ###   ########.fr       */
+/*   Updated: 2025/03/10 21:37:13 by mifelida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,15 @@
 #include "FdF_types.h"
 #include "ft_dynarr.h"
 #include "libft.h"
+#include "matrix.h"
 
+#include <ctype.h>
 #include <fcntl.h>
+#include <math.h>
 #include <stddef.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <unistd.h>
-
-#define WHITE	0XFFFFFFFF
-
-static uint32_t	_get_color(char *s)
-{
-	if (ft_strnstr(s, "0x", ft_strlen(s)))
-		return (ft_atoi_base(ft_strchr(s, 'x') + 1,
-				"0123456789abcdef") << 8 | 0xFF);
-	return (WHITE);
-}
 
 static size_t	_add_row(t_model *m, char *line)
 {
@@ -49,7 +42,7 @@ static size_t	_add_row(t_model *m, char *line)
 	{
 		new.v.x = i * 10;
 		new.v.z = ft_atoi(line_split[i]);
-		new.c = _get_color(line_split[i]);
+		new.c = get_color(line_split[i]);
 		if (verts_push(m->verts, new))
 			return (ft_split_free(line_split), 0);
 		i++;
@@ -127,5 +120,6 @@ int	load_map(t_model **m, char *file)
 	(*m)->view.verts = (t_verteces *) dynarr_copy(&(*m)->verts->attr);
 	if (!(*m)->view.verts)
 		return (model_free(m), 1);
+	center_map(*m);
 	return (0);
 }

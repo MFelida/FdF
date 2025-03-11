@@ -6,7 +6,7 @@
 /*   By: mifelida <mifelida@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 20:44:52 by mifelida          #+#    #+#             */
-/*   Updated: 2025/03/07 12:04:44 by mifelida         ###   ########.fr       */
+/*   Updated: 2025/03/11 10:26:25 by mifelida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_edge	edges_get(t_edges *e, size_t idx)
 	p_res = dynarr_at(&e->attr, idx);
 	if (p_res)
 		return (*p_res);
+	res.start = 0;
 	res.end = res.start;
 	return (res);
 }

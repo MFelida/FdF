@@ -6,7 +6,7 @@
 /*   By: mifelida <mifelida@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 17:43:30 by mifelida          #+#    #+#             */
-/*   Updated: 2025/03/10 21:43:01 by mifelida         ###   ########.fr       */
+/*   Updated: 2025/03/11 11:11:41 by mifelida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +103,11 @@ void	draw_map(mlx_image_t *image, t_model *m)
 	while (i < m->edges->attr.size)
 	{
 		e = edges_get(m->edges, i);
+		i++;
+		if (e.start == e.end)
+			continue;
 		draw_line(image,
 			m->view.verts->data[e.start],
 			m->view.verts->data[e.end]);
-		i++;
 	}
 }

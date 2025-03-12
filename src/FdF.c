@@ -6,7 +6,7 @@
 /*   By: mifelida <mifelida@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 20:21:10 by mifelida          #+#    #+#             */
-/*   Updated: 2025/03/09 23:15:22 by mifelida         ###   ########.fr       */
+/*   Updated: 2025/03/12 15:18:46 by mifelida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,15 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-void	loop_callback(void *param)
+void	esc_close(mlx_key_data_t key_data, void *fdf_data)
 {
 	t_fdf	*fdf;
 
-	fdf = param;
-	ft_bzero(fdf->image->pixels,
-		fdf->image->width * fdf->image->height * sizeof(uint32_t));
-	draw_map(fdf->image, fdf->m);
+	if (key_data.action == MLX_RELEASE && key_data.key == MLX_KEY_ESCAPE)
+	{
+		fdf = fdf_data;
+		mlx_close_window(fdf->mlx);
+	}
 }
 
 int	main(int argc, char *argv[])
@@ -50,6 +51,7 @@ int	main(int argc, char *argv[])
 		return (model_free(&fdf.m), mlx_terminate(fdf.mlx), EXIT_FAILURE);
 	mlx_image_to_window(fdf.mlx, fdf.image, 0, 0);
 	draw_map(fdf.image, fdf.m);
+	mlx_key_hook(fdf.mlx, esc_close, &fdf);
 	mlx_loop(fdf.mlx);
 	mlx_terminate(fdf.mlx);
 	model_free(&fdf.m);

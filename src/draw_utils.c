@@ -6,7 +6,7 @@
 /*   By: mifelida <mifelida@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 18:55:08 by mifelida          #+#    #+#             */
-/*   Updated: 2025/03/10 21:14:10 by mifelida         ###   ########.fr       */
+/*   Updated: 2025/03/13 14:33:47 by mifelida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "FdF_settings.h"
 #include "FdF_types.h"
 #include "MLX42/MLX42.h"
-#include "libft.h"
 #include "vector.h"
 
 #include <math.h>

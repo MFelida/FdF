@@ -6,7 +6,7 @@
 /*   By: mifelida <mifelida@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 12:57:53 by mifelida          #+#    #+#             */
-/*   Updated: 2025/03/10 21:37:13 by mifelida         ###   ########.fr       */
+/*   Updated: 2025/03/13 14:34:08 by mifelida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,8 @@
 #include "FdF_types.h"
 #include "ft_dynarr.h"
 #include "libft.h"
-#include "matrix.h"
 
-#include <ctype.h>
 #include <fcntl.h>
-#include <math.h>
 #include <stddef.h>
 #include <stdint.h>
 #include <stdlib.h>

@@ -6,20 +6,15 @@
 /*   By: mifelida <mifelida@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 20:21:10 by mifelida          #+#    #+#             */
-/*   Updated: 2025/03/12 15:18:46 by mifelida         ###   ########.fr       */
+/*   Updated: 2025/03/13 14:34:00 by mifelida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "FdF.h"
 #include "FdF_settings.h"
-#include "FdF_types.h"
 #include "MLX42/MLX42.h"
-#include "libft.h"
-#include "matrix.h"
-#include "vector_utils.h"
 
 #include <fcntl.h>
-#include <math.h>
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>

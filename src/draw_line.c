@@ -6,12 +6,11 @@
 /*   By: mifelida <mifelida@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 15:07:43 by mifelida          #+#    #+#             */
-/*   Updated: 2025/03/10 20:43:42 by mifelida         ###   ########.fr       */
+/*   Updated: 2025/03/13 14:33:49 by mifelida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "FdF.h"
-#include "FdF_settings.h"
 #include "FdF_types.h"
 #include "MLX42/MLX42.h"
 #include "vector.h"

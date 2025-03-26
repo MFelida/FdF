@@ -6,7 +6,7 @@
 /*   By: mifelida <mifelida@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 13:26:11 by mifelida          #+#    #+#             */
-/*   Updated: 2025/03/10 21:23:58 by mifelida         ###   ########.fr       */
+/*   Updated: 2025/03/26 15:38:55 by mifelida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,9 @@
 # include "ft_dynarr.h"
 # include "vector.h"
 # include "matrix.h"
-# include "check_endian.h"
 
 # include <stdint.h>
 
-# if IS_LITTLE_ENDIAN
-
 typedef struct u_vertex
 {
 	t_vec4	v;
@@ -37,24 +34,6 @@ typedef struct u_vertex
 		};
 	};
 }	t_vertex;
-# else
-
-typedef struct u_vertex
-{
-	t_vec4	v;
-	union
-	{
-		int32_t	c;
-		struct
-		{
-			uint8_t	r;
-			uint8_t	g;
-			uint8_t	b;
-			uint8_t	a;
-		};
-	};
-}	t_vertex;
-# endif
 
 typedef union u_verteces
 {

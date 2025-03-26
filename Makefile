@@ -3,7 +3,7 @@ CFLAGS = -Wall -Wextra -Werror -c\
 		-I$(INCDIR) -I$(LIBFTDIR) -I$(LINALGDIR)/include\
 		-I$(DYNARRDIR)/include -I$(MLX42DIR)/include
 
-NAME = FdF
+NAME = fdf
 
 SRCFILES = FdF.c edges.c verteces.c model.c load_map.c\
 		   draw_line.c draw_map.c draw_utils.c to_hsv.c to_rgb.c
